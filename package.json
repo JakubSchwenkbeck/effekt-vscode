@@ -167,7 +167,7 @@
                     "default": true,
                     "markdownDescription": "Show captures like : ``` {io} def main(): Unit = {   println(\"hello world\") ```",
                     "scope": "resource",
-                    "order": 1
+                    "order": 2 
                 }
                 
             }
@@ -195,7 +195,7 @@
                 "key": "ctrl+alt",
                 "mac": "ctrl+alt",
                 "command": "effekt.showInlayHintsOnKey",
-                "when": "editorLangId == effekt && config.effekt.inlayHints.mode == 'OffUnlessPressed'"
+                "when": "editorTextFocus && editorLangId == 'effekt'"
             }
         ],
         "configurationDefaults": {

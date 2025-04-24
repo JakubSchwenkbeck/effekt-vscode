@@ -286,9 +286,7 @@ export async function activate(context: vscode.ExtensionContext) {
      return hints;
    };
    
-   // Start the client
-   client.start(); // TODO REMOVE!!
-   
+
    
 }
 
