@@ -10,6 +10,7 @@ import {
 } from 'vscode-languageclient/node';
 import { EffektManager } from './effektManager';
 import { EffektIRContentProvider } from './irProvider';
+import { EffektInlayHintsProvider } from './inlayHintsProvider';
 
 import * as net from 'net';
 
@@ -256,8 +257,39 @@ export async function activate(context: vscode.ExtensionContext) {
         });
     });
 
-    await client.start();
+    await client.start(); 
     context.subscriptions.push(client);
+
+
+   // Create the inlay hints provider
+   const inlayHintsProvider = new EffektInlayHintsProvider();
+  
+   // Set up middleware to filter inlay hints
+   if (!client.clientOptions.middleware) {
+     client.clientOptions.middleware = {};
+   }
+   
+   client.clientOptions.middleware.provideInlayHints = async (document, position, token, next) => {
+     // Get hints from server
+     const hints = await next(document, position, token);
+     
+     if (!hints || !Array.isArray(hints)) {
+       return hints;
+     }
+     
+     // Filter hints based on settings
+     if (!inlayHintsProvider.shouldShowCaptureHints(document)) {
+       return [];
+     }
+     
+     // Return all hints (since we only have capture hints for now)
+     return hints;
+   };
+   
+   // Start the client
+   client.start(); // TODO REMOVE!!
+   
+   
 }
 
 export function deactivate(): Thenable<void> | undefined {

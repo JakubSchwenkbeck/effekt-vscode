@@ -162,34 +162,14 @@
                     "scope": "resource",
                     "order": 1
                 },
-                "effekt.inlayHints.typeAnnotations": {
+                "effekt.inlayHints.captures": {
                     "type": "boolean",
                     "default": true,
-                    "markdownDescription": "Show type annotations for variables and expressions.\n\n```effekt\nval x/* : Int */ = 42\n```",
+                    "markdownDescription": "Show captures like : ``` {io} def main(): Unit = {   println(\"hello world\") ```",
                     "scope": "resource",
-                    "order": 2
-                },
-                "effekt.inlayHints.parameterNames": {
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Show parameter names at function call sites.\n\n```effekt\ngreet(/* name: */ \"John\", /* age: */ 30)\n```",
-                    "scope": "resource",
-                    "order": 3
-                },
-                "effekt.inlayHints.captureAnnotations": {
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Show captured variables for closures.\n\n```effekt\nval closure = { /* [x] */ x + 1 }\n```",
-                    "scope": "resource",
-                    "order": 4
-                },
-                "effekt.inlayHints.returnTypes": {
-                    "type": "boolean",
-                    "default": true, 
-                    "markdownDescription": "Show inferred return types for functions.\n\n```effekt\ndef add(a: Int, b: Int)/* : Int */ {\n  a + b\n}\n```",
-                    "scope": "resource",
-                    "order": 5
+                    "order": 1
                 }
+                
             }
         },
         "commands": [
@@ -202,7 +182,13 @@
                 "category": "Effekt",
                 "command": "effekt.restartServer",
                 "title": "Restart LSP Server"
+            },
+            {
+                "category": "Effekt",
+                "command": "effekt.showInlayHintsOnKey",
+                "title": "Show Inlay Hints (When Key Pressed)"
             }
+
         ],
         "keybindings": [
             {
